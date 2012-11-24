@@ -20,11 +20,11 @@ public:
 
 #ifdef _WIN32
 
-	enum Flag {
-		ReadOnly = GENERIC_READ,
-		WriteOnly = GENERIC_WRITE,
-		ReadWrite = (GENERIC_READ | GENERIC_WRITE)
-	};
+	typedef DWORD Flag;
+
+	static const Flag ReadOnly = GENERIC_READ;
+	static const Flag WriteOnly = GENERIC_WRITE;
+	static const Flag ReadWrite = (GENERIC_READ | GENERIC_WRITE);
 
 	typedef HANDLE Handle;
 	typedef DWORD ssize_t;
