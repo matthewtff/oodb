@@ -11,14 +11,9 @@ Building.
 
 Linux:
 
-Move to oodb/src and execute "make". The result would be shared and static
+Move to oodb and execute "CXX=clang++ make .". The result would be a static
 library.
 
 Windows:
 
-Just create a project for static library and add files from oodb/src to it.
-
-
-Tests:
-
-For now there are no tests for this library :(
+Just use cmake to generate solution and build it.
