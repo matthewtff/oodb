@@ -1,12 +1,9 @@
 #include "file_driver.hh"
 
-#include <unistd.h>
-#include <errno.h>
 #include <cstring>
 
-#ifdef _DEBUG
-#include <iostream>
-#endif /* _DEBUG */
+#include <unistd.h>
+#include <errno.h>
 
 namespace oodb {
 
@@ -36,10 +33,6 @@ bool File::open ()
 
 #endif /* _WIN32 */
 
-#ifdef _DEBUG
-		std::cout << "Error opening file: " << m_name << std::endl;
-		std::cout << "Error: " << strerror(errno) << std::endl;
-#endif /* _DEBUG */
 		m_opened = false;
 	} else
 		m_opened = true;
@@ -83,7 +76,7 @@ void File::clear ()
 	open ();
 }
 
-File::ssize_t File::write (const void* data, size_t size)
+ssize_t File::write (const void* data, size_t size)
 {
 	if (!m_opened)
 		return -1;
@@ -103,7 +96,7 @@ File::ssize_t File::write (const void* data, size_t size)
 #endif /* _WIN32 */
 }
 
-File::ssize_t File::read (void* data, size_t size)
+ssize_t File::read (void* data, size_t size)
 {
 	if (!m_opened)
 		return -1;

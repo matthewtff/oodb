@@ -38,7 +38,6 @@ public:
 	};
 
 	typedef int Handle;
-	typedef ssize_t ssize_t;
 
 #endif /* _WIN32 */
 
