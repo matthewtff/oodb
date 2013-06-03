@@ -10,3 +10,12 @@
 *.lai
 *.la
 *.a
+
+# CMake & make fiels
+Makefile
+CMakeLists.txt
+CMakeFiles/*
+cmake_*
+
+# Mac OS X files
+.DS_Store
