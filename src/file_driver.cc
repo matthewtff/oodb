@@ -1,9 +1,7 @@
 #include "file_driver.hh"
 
 #include <cstring>
-
-#include <unistd.h>
-#include <errno.h>
+#include <cerrno>
 
 namespace oodb {
 
@@ -76,7 +74,7 @@ void File::clear ()
 	open ();
 }
 
-ssize_t File::write (const void* data, size_t size)
+File::ssize_t File::write (const void* data, size_t size)
 {
 	if (!m_opened)
 		return -1;
@@ -96,7 +94,7 @@ ssize_t File::write (const void* data, size_t size)
 #endif /* _WIN32 */
 }
 
-ssize_t File::read (void* data, size_t size)
+File::ssize_t File::read (void* data, size_t size)
 {
 	if (!m_opened)
 		return -1;
