@@ -10,8 +10,11 @@
 #else /* _WIN32 */
 
 #include <fcntl.h>
+#include <unistd.h>
 
 #endif /* _WIN32 */
+
+#include <cerrno>
 
 namespace oodb {
 

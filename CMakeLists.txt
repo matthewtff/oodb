@@ -3,7 +3,9 @@ project (oodb)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux" OR ${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" OR
+    ${CMAKE_SYSTEM_NAME} MATCHES "Linux" OR
+    ${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 
 	SET (warnings "-Wall -Wextra -Woverloaded-virtual -Werror")
 
@@ -23,8 +25,21 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux" OR ${CMAKE_SYSTEM_NAME} MATCHES "FreeBS
 
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	
-endif (${CMAKE_SYSTEM_NAME} MATCHES "Linux" OR ${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+endif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" OR
+       ${CMAKE_SYSTEM_NAME} MATCHES "Linux" OR
+       ${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+
+include_directories (
+	/opt/local/include
+)
+
+endif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+
+include_directories (
+  ${CMAKE_SOURCE_DIR}/src
+)
 set ( oodb_src
 	src/file_driver.cc
 	src/oodb.cc
