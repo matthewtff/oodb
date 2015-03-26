@@ -24,59 +24,63 @@ typedef std::unordered_map<std::string, Integer> Integers;
 typedef std::pair<std::string, std::string> HashValue;
 
 class Db {
-public:
-	Db (const std::string& FileName);
-	~Db ();
-	void load ();
-	void save ();
-	void setHash (const std::string& key, const HashValue& value);
-	std::string& getHash (const std::string& key, const std::string& u_key);
-	std::string getHash (const std::string& key, const std::string& u_key) const;
+ public:
+  Db(const std::string& FileName);
+  ~Db();
+  void Load();
+  void Save();
 
-	Set& getSet (const std::string& key) { return m_sets[key]; }
-	bool addSet (const std::string& key, const std::string& value);
-	bool checkSet (const std::string& key, const std::string& value);
-	bool checkSet (const std::string& key, const std::string& value) const;
-	bool remSet (const std::string& key, const std::string& value);
+  HashMap& GetHashMap(const std::string& key) const;
+  void SetHash(const std::string& key, const HashValue& value);
+  std::string& GetHash(const std::string& key, const std::string& u_key);
+  std::string GetHash(const std::string& key, const std::string& u_key) const;
 
-	void setString (const std::string& key, const std::string& value);
-	std::string& getString (const std::string& key);
-	std::string getString (const std::string& key) const;
-	void unsetString (const std::string& key);
+  Set& GetSet(const std::string& key) { return sets_[key]; }
+  bool AddSet(const std::string& key, const std::string& value);
+  bool CheckSet(const std::string& key, const std::string& value) const;
+  bool RemoveSet(const std::string& key, const std::string& value);
 
-	void setInteger (const std::string& key, Integer value);
-	Integer getInteger (const std::string& key);
-	Integer getInteger (const std::string& key) const;
-	Integer incrInteger (const std::string& key);
-	Integer decrInteger (const std::string& key);
-	void unsetInteger (const std::string& key);
+  void SetString(const std::string& key, const std::string& value);
+  std::string GetString(const std::string& key) const;
+  void UnSetString(const std::string& key);
 
-	void flush ();
+  void SetInteger(const std::string& key, Integer value);
+  Integer GetInteger(const std::string& key) const;
+  Integer IncrementInteger(const std::string& key);
+  Integer DecrementInteger(const std::string& key);
+  void UnSetInteger(const std::string& key);
 
-	Hashes& getHashes () { return m_hashes; }
-	Sets& getSets () { return m_sets; }
-	Strings& getStrings () { return m_strings; }
-	Integers& getIntegers () { return m_integers; }
+  void Flush();
 
-private:
-
-	void loadHashes ();
-	void loadSets ();
-	void loadStrings ();
-	void loadIntegers ();
-
-	void saveHashes ();
-	void saveSets ();
-	void saveStrings ();
-	void saveIntegers ();
+  Hashes& GetHashes() { return hashes_; }
+  Sets& GetSets() { return sets_; }
+  Strings& GetStrings() { return strings_; }
+  Integers& GetIntegers() { return integers_; }
 
 private:
-	File m_file;
 
-	Hashes m_hashes;
-	Sets m_sets;
-	Strings m_strings;
-	Integers m_integers;
+  void LoadHashes ();
+  void LoadSets ();
+  void LoadStrings ();
+  void LoadIntegers ();
+
+  void SaveHashes ();
+  void SaveSets ();
+  void SaveStrings ();
+  void SaveIntegers ();
+
+  uint32_t ReadNumber();
+  std::string ReadString();
+  void WriteNumber(const uint32_t number);
+  void WriteString(const std::string& value);
+
+private:
+  File file_;
+
+  Hashes hashes_;
+  Sets sets_;
+  Strings strings_;
+  Integers integers_;
 };
 
 } // namespace oodb
